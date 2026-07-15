@@ -18,7 +18,10 @@ import { randomUUID } from "crypto";
 
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
-    cb(null, path.join(__dirname, "../../../uploads"));
+    // process.cwd() = the directory PM2/Node was launched from (project root).
+    // Using __dirname is unreliable because the compiled output path
+    // (e.g. dist/src/shared/middlewares/) differs from the source path.
+    cb(null, path.join(process.cwd(), "uploads"));
   },
   filename: (_req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();

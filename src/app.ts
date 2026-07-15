@@ -49,7 +49,7 @@ app.get("/health", (_req, res) => {
 app.use("/uploads", (_req, res, next) => {
   res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
   next();
-}, express.static(path.join(__dirname, "../uploads")));
+}, express.static(path.join(process.cwd(), "uploads")));
 
 // ─── Rate Limiting ────────────────────────────────────────────────────────────
 // Global cap: 100 req / 15 min per IP across all API routes
